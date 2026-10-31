@@ -26,7 +26,7 @@ dependencies {
     implementation 'org.jgrapht:jgrapht-core:1.5.2'
     implementation 'org.openpnp:opencv:4.9.0-0'
     implementation 'ai.djl:api:0.33.0'
-    implementation 'org.flowdigger:xir-sax:1.0.0'
+    implementation 'org.flowdigger:xir-sax:1.0.1'
 
     runtimeOnly 'ai.djl.onnxruntime:onnxruntime-engine:0.33.0'
     runtimeOnly 'com.microsoft.onnxruntime:onnxruntime:1.20.0'
@@ -57,7 +57,7 @@ tasks.register('generateCanonicalJaxb', JavaExec) {
             '-no-header',
             '-encoding', 'UTF-8',
             '-d', generatedJaxbDir.get().asFile.absolutePath,
-            '-p', 'org.flowdigger.gradle.ooxml.generated.canonical',
+            '-p', 'name.jurgenei.gradle.ooxml.generated.canonical',
             file('src/main/resources/schema/canonical.xsd').absolutePath
     )
 }

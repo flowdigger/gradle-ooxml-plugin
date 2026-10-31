@@ -1,0 +1,3 @@
+org.flowdigger.gradle.ooxml.recognizer.EmfAssetRecognizer
+org.flowdigger.gradle.ooxml.recognizer.PngAssetRecognizer
+
