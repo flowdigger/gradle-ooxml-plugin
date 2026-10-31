@@ -33,4 +33,3 @@ Runner outputs:
 - canonical output file path
 - total graph count
 - suspicious singleton count
-

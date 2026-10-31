@@ -19,4 +19,3 @@ Use the plugin task against the fixture and compare the output with this sample:
 ```bash
 ./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxFormulasAsMathMlAndPreservesOrder
 ```
-

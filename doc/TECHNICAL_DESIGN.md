@@ -312,4 +312,3 @@ Task execution:
 ---
 
 Design principle: maximize unattended recovery quality with bounded heuristic cost, preserve deterministic canonical output, keep extension points open for format-specific recognizers.
-

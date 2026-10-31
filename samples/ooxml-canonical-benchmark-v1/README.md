@@ -23,4 +23,3 @@ Run the plugin conversion task against the benchmark corpus to compare real outp
 ```bash
 ./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest
 ```
-

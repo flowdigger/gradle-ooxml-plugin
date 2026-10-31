@@ -36,4 +36,3 @@ Register implementation via `ServiceLoader`:
 
 - `EmfAssetRecognizerTest` verifies benchmark graph quality for `v2-diagrams.docx`.
 - `OoXmlToCanonicalTaskTest` verifies extension-driven recognizer class loading.
-

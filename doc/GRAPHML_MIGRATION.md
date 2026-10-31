@@ -26,4 +26,3 @@ Inside each graph:
 ## Validation
 
 `ValidateCanonicalTask` resolves schema by URL so imported `graphml.xsd` is loaded correctly.
-
