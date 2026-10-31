@@ -100,7 +100,7 @@ canonical.xml (plain xml or packaged zip)
 
 Root namespace:
 
-- `http://jurgenei.name/canonical`
+- `http://flowdigger.org/canonical`
 
 Graph namespace:
 
