@@ -85,7 +85,6 @@ Examples of plain text represented in canonical form:
 
 <kbd>![running text](src/main/resources/png/running-text.png)</kbd>
 
-
 canonical output:
 <table>
   <tr>
@@ -379,7 +378,6 @@ href="media/image1.emf" source-path="/word/document/p[2]/drawing[1]"&gt;
 </table>
 
 ### Diagrams and XY charts with precision
-
 
 - chart evidence captured as canonical `chart` (`axis`, `series`, ordered values)
 - XY points preserve coordinate order from source evidence
@@ -696,7 +694,7 @@ Canonical output (same content, two serializations):
 ### Extract assets for review
 
 ```groovy
-tasks.named('extractAssets', org.flowdigger.gradle.ooxml.ExtractAssetsTask) {
+tasks.named('extractAssets', name.flowdigger.gradle.ooxml.ExtractAssetsTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -707,7 +705,7 @@ tasks.named('extractAssets', org.flowdigger.gradle.ooxml.ExtractAssetsTask) {
 ### Validate canonical outputs
 
 ```groovy
-tasks.named('validateCanonical', org.flowdigger.gradle.ooxml.ValidateCanonicalTask) {
+tasks.named('validateCanonical', name.flowdigger.gradle.ooxml.ValidateCanonicalTask) {
     inputDirectory.set(layout.buildDirectory.dir('ooxml/canonical'))
 }
 ```
