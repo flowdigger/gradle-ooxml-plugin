@@ -13,7 +13,7 @@ Add recognizer classes in Gradle extension:
 
 ```groovy
 plugins {
-    id 'name.jurgenei.gradle.ooxml'
+    id 'org.flowdigger.gradle.ooxml'
 }
 
 ooxml {
@@ -23,14 +23,14 @@ ooxml {
 
 Each recognizer must:
 
-- implement `name.jurgenei.gradle.ooxml.recognizer.AssetRecognizer`
+- implement `org.flowdigger.gradle.ooxml.recognizer.AssetRecognizer`
 - provide public no-arg constructor
 
 ## SPI Registration
 
 Register implementation via `ServiceLoader`:
 
-`src/main/resources/META-INF/services/name.jurgenei.gradle.ooxml.recognizer.AssetRecognizer`
+`src/main/resources/META-INF/services/org.flowdigger.gradle.ooxml.recognizer.AssetRecognizer`
 
 ## Validation
 

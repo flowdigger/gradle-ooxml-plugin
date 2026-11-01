@@ -25,7 +25,7 @@ Use runner to canonicalize one document and count suspicious singleton graphs.
 ```zsh
 cd /Users/cs79en/Developer/GitHub/gradle/gradle-ooxml-plugin
 ./gradlew --no-daemon testClasses
-java -cp build/classes/java/main:build/classes/java/test name.jurgenei.gradle.ooxml.DiagramAuditRunner "/Users/cs79en/Developer/Projects/lineage/work/src/fd/FD Cover Allocation v86.0.docx"
+java -cp build/classes/java/main:build/classes/java/test org.flowdigger.gradle.ooxml.DiagramAuditRunner "/Users/cs79en/Developer/Projects/lineage/work/src/fd/FD Cover Allocation v86.0.docx"
 ```
 
 Runner outputs:

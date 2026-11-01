@@ -294,7 +294,7 @@ Typical plugin usage:
 
 ```groovy
 plugins {
-    id 'name.jurgenei.gradle.ooxml'
+    id 'org.flowdigger.gradle.ooxml'
 }
 
 ooxml {

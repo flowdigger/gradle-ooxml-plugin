@@ -17,6 +17,6 @@ This folder contains canonical XML samples for the benchmark corpus in `src/test
 Use the plugin task against the fixture and compare the output with this sample:
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxFormulasAsMathMlAndPreservesOrder
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxFormulasAsMathMlAndPreservesOrder
 ```
 

@@ -91,9 +91,9 @@ Expected benchmark signals:
 
 ## Test Implementation Map
 
-- Unit tests: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlCanonicalizerTest.java`
-- Task-level conversion coverage: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
-- Functional task wiring coverage: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlPluginFunctionalTest.java`
+- Unit tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlCanonicalizerTest.java`
+- Task-level conversion coverage: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
+- Functional task wiring coverage: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlPluginFunctionalTest.java`
 - Sample canonical outputs: `samples/ooxml-canonical-benchmark-v1/`
 
 ## Pass Criteria

@@ -21,8 +21,8 @@ Chart fixtures (`v3-emf-chart.docx`, `v3-png-chart.docx`) validate canonical `ch
 During PaddleOCR migration, benchmark fallback keeps chart extraction deterministic for v3 fixtures.
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxPngDiagramFixtureWithOcrAnnotations
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxEmfChartFixtureWithGraphEvidence
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxPngChartFixtureWithGraphEvidence
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxPngDiagramFixtureWithOcrAnnotations
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxEmfChartFixtureWithGraphEvidence
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxPngChartFixtureWithGraphEvidence
 ```
 

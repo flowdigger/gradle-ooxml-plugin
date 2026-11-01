@@ -1,7 +1,7 @@
 # gradle-ooxml-plugin
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.ooxml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.ooxml)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/org.flowdigger.gradle.ooxml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/org.flowdigger.gradle.ooxml)
 [![Build and Test](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
 [![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
 [![Coverage CI](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/coverage.yml)
@@ -580,15 +580,15 @@ Visual-recognition and chart-evidence corpus.
 
 ## Plugin ID
 
-- `name.jurgenei.gradle.ooxml`
+- `org.flowdigger.gradle.ooxml`
 
 ## Tasks
 
-- `ooxmlToCanonical` (`name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask`)
+- `ooxmlToCanonical` (`org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask`)
   - converts OOXML documents to canonical zip packages (`canonical.xml` + `media/*`)
-- `extractAssets` (`name.jurgenei.gradle.ooxml.ExtractAssetsTask`)
+- `extractAssets` (`org.flowdigger.gradle.ooxml.ExtractAssetsTask`)
   - extracts media and embedded assets from OOXML packages
-- `validateCanonical` (`name.jurgenei.gradle.ooxml.ValidateCanonicalTask`)
+- `validateCanonical` (`org.flowdigger.gradle.ooxml.ValidateCanonicalTask`)
   - validates canonical XML against `canonical.xsd`
 
 ## Gradle Usage
@@ -597,14 +597,14 @@ Visual-recognition and chart-evidence corpus.
 
 ```groovy
 plugins {
-    id 'name.jurgenei.gradle.ooxml'
+    id 'org.flowdigger.gradle.ooxml'
 }
 ```
 
 ### Convert full directory tree (single root)
 
 ```groovy
-tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask) {
+tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -615,7 +615,7 @@ tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask)
 ### Convert multiple directory trees
 
 ```groovy
-tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask) {
+tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
     source(fileTree(layout.projectDirectory.dir('docs/architecture')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -632,7 +632,7 @@ tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask)
 ### Emit legacy flat XML instead of zip packages
 
 ```groovy
-tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask) {
+tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -645,7 +645,7 @@ tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask)
 ### Emit canonical S-expression payload
 
 ```groovy
-tasks.named('ooxmlToCanonical', name.jurgenei.gradle.ooxml.OoXmlToCanonicalTask) {
+tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -696,7 +696,7 @@ Canonical output (same content, two serializations):
 ### Extract assets for review
 
 ```groovy
-tasks.named('extractAssets', name.jurgenei.gradle.ooxml.ExtractAssetsTask) {
+tasks.named('extractAssets', org.flowdigger.gradle.ooxml.ExtractAssetsTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -707,7 +707,7 @@ tasks.named('extractAssets', name.jurgenei.gradle.ooxml.ExtractAssetsTask) {
 ### Validate canonical outputs
 
 ```groovy
-tasks.named('validateCanonical', name.jurgenei.gradle.ooxml.ValidateCanonicalTask) {
+tasks.named('validateCanonical', org.flowdigger.gradle.ooxml.ValidateCanonicalTask) {
     inputDirectory.set(layout.buildDirectory.dir('ooxml/canonical'))
 }
 ```
@@ -752,19 +752,19 @@ Run tests:
 Run canonicaliser tests only:
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest
 ```
 
 Run task-level conversion tests:
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlToCanonicalTaskTest
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlToCanonicalTaskTest
 ```
 
 Regenerate benchmark samples:
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.GenerateSamples.regenerateSampleXmlFiles
+./gradlew test --tests org.flowdigger.gradle.ooxml.GenerateSamples.regenerateSampleXmlFiles
 ```
 
 Generate schema-first JAXB sources:
@@ -775,7 +775,7 @@ Generate schema-first JAXB sources:
 
 ## Test layout
 
-- unit extraction tests: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlCanonicalizerTest.java`
-- task conversion tests: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
-- functional TestKit tests: `src/test/java/name/jurgenei/gradle/ooxml/OoXmlPluginFunctionalTest.java`
-- asset extraction tests: `src/test/java/name/jurgenei/gradle/ooxml/ExtractAssetsTaskTest.java`
+- unit extraction tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlCanonicalizerTest.java`
+- task conversion tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
+- functional TestKit tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlPluginFunctionalTest.java`
+- asset extraction tests: `src/test/java/org/flowdigger/gradle/ooxml/ExtractAssetsTaskTest.java`

@@ -13,14 +13,14 @@ This folder contains representative canonical XML samples for the benchmark corp
 - Samples are intentionally concise and highlight the structures used by benchmark assertions.
 - Exact canonical output can include additional `Paragraph`, `Shape`, or provenance entries.
 - Determinism and minimum structure coverage are enforced by unit tests in:
-  - `src/test/java/name/jurgenei/gradle/ooxml/OoXmlCanonicalizerTest.java`
-  - `src/test/java/name/jurgenei/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
+  - `src/test/java/org/flowdigger/gradle/ooxml/OoXmlCanonicalizerTest.java`
+  - `src/test/java/org/flowdigger/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
 
 ## Regeneration workflow
 
 Run the plugin conversion task against the benchmark corpus to compare real output with these samples:
 
 ```bash
-./gradlew test --tests name.jurgenei.gradle.ooxml.OoXmlCanonicalizerTest
+./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest
 ```
 
