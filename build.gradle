@@ -57,7 +57,7 @@ tasks.register('generateCanonicalJaxb', JavaExec) {
             '-no-header',
             '-encoding', 'UTF-8',
             '-d', generatedJaxbDir.get().asFile.absolutePath,
-            '-p', 'name.jurgenei.gradle.ooxml.generated.canonical',
+            '-p', 'org.flowdigger.gradle.ooxml.generated.canonical',
             file('src/main/resources/schema/canonical.xsd').absolutePath
     )
 }
