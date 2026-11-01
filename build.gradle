@@ -8,7 +8,7 @@ configurations {
     xjcTool
 }
 
-group = 'name.jurgenei.gradle'
+group = 'org.flowdigger.gradle'
 version = '0.1.12'
 
 repositories {
@@ -54,7 +54,7 @@ tasks.register('generateCanonicalJaxb', JavaExec) {
             '-no-header',
             '-encoding', 'UTF-8',
             '-d', generatedJaxbDir.get().asFile.absolutePath,
-            '-p', 'name.jurgenei.gradle.ooxml.generated.canonical',
+            '-p', 'org.flowdigger.gradle.ooxml.generated.canonical',
             file('src/main/resources/schema/canonical.xsd').absolutePath
     )
 }
@@ -80,8 +80,8 @@ gradlePlugin {
 
     plugins {
         ooxmlPlugin {
-            id = 'name.jurgenei.gradle.ooxml'
-            implementationClass = 'name.jurgenei.gradle.ooxml.OoXmlPlugin'
+            id = 'org.flowdigger.gradle.ooxml'
+            implementationClass = 'org.flowdigger.gradle.ooxml.OoXmlPlugin'
             displayName = 'OOXML Canonical Plugin'
             description = 'Converts DOCX/PPTX/XLSX to canonical XML and extracts assets.'
             tags = ['ooxml', 'docx4j', 'jaxb', 'docx', 'pptx', 'xlsx', 'xml']
