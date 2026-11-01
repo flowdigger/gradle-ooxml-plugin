@@ -694,7 +694,7 @@ Canonical output (same content, two serializations):
 ### Extract assets for review
 
 ```groovy
-tasks.named('extractAssets', name.flowdigger.gradle.ooxml.ExtractAssetsTask) {
+tasks.named('extractAssets', org.flowdigger.gradle.ooxml.ExtractAssetsTask) {
     source(fileTree(layout.projectDirectory.dir('docs')) {
         include '**/*.docx', '**/*.pptx', '**/*.xlsx'
     })
@@ -705,7 +705,7 @@ tasks.named('extractAssets', name.flowdigger.gradle.ooxml.ExtractAssetsTask) {
 ### Validate canonical outputs
 
 ```groovy
-tasks.named('validateCanonical', name.flowdigger.gradle.ooxml.ValidateCanonicalTask) {
+tasks.named('validateCanonical', org.flowdigger.gradle.ooxml.ValidateCanonicalTask) {
     inputDirectory.set(layout.buildDirectory.dir('ooxml/canonical'))
 }
 ```

@@ -78,8 +78,8 @@ tasks.matching { it.name == 'sourcesJar' }.configureEach {
 }
 
 gradlePlugin {
-    website = 'https://github.com/jurgenei/gradle-ooxml-plugin'
-    vcsUrl = 'https://github.com/jurgenei/gradle-ooxml-plugin.git'
+    website = 'https://github.com/flowdigger/gradle-ooxml-plugin'
+    vcsUrl = 'https://github.com/flowdigger/gradle-ooxml-plugin.git'
 
     plugins {
         ooxmlPlugin {
