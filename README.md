@@ -13,6 +13,7 @@
 [![Checkstyle](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/checkstyle.yml)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-ooxml-plugin/security/dependabot)
 [![Coverage](https://codecov.io/gh/flowdigger/gradle-ooxml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-ooxml-plugin)
+[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-ooxml-plugin)](https://search.maven.org/artifact/org.flowdigger.gradle/gradle-ooxml-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
 [![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)
