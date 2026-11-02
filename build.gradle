@@ -5,6 +5,8 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
+    id 'org.owasp.dependencycheck' version '10.0.3'
+    id 'com.github.spotbugs' version '6.1.0'
 }
 
 configurations {
@@ -13,6 +15,11 @@ configurations {
 
 group = 'org.flowdigger.gradle'
 version = '1.0.0'
+
+ext {
+    spotbugsEngineVersion = '4.8.6'
+    findSecBugsVersion = '1.13.0'
+}
 
 repositories {
     mavenCentral()
@@ -36,6 +43,7 @@ dependencies {
     testImplementation gradleTestKit()
     testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+    spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findSecBugsVersion}"
 }
 
 def generatedJaxbDir = layout.buildDirectory.dir('generated/sources/xjc/main')
@@ -71,6 +79,33 @@ sourceSets {
 
 tasks.named('compileJava') {
     dependsOn tasks.named('generateCanonicalJaxb')
+}
+
+dependencyCheck {
+    format = 'HTML,JSON,XML'
+    failBuildOnCVSS = 7.0
+    suppressionFile = 'dependency-check-suppressions.xml'
+    nvd {
+        apiKey = findProperty('org.owasp.dependencycheck.nvd.api.key') ?: System.getenv('NVD_API_KEY')
+    }
+}
+
+spotbugs {
+    toolVersion = spotbugsEngineVersion
+    ignoreFailures = true
+    effort = com.github.spotbugs.snom.Effort.valueOf('DEFAULT')
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('MEDIUM')
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+    reports {
+        html.required = true
+        xml.required = false
+    }
+}
+
+tasks.matching { it.name == 'spotbugsTest' }.configureEach {
+    enabled = false
 }
 
 tasks.matching { it.name == 'sourcesJar' }.configureEach {
@@ -133,6 +168,12 @@ tasks.named('check') {
     dependsOn tasks.named('jacocoTestCoverageVerification')
 }
 
+tasks.register('coverage') {
+    group = 'verification'
+    description = 'Runs tests, generates JaCoCo report, and verifies minimum coverage threshold.'
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
 
 signing {
     def signingKey = providers.gradleProperty('signingKey').orNull
@@ -173,6 +214,7 @@ def stageCentralBundleRepo = tasks.register('stageCentralBundleRepo', Sync) {
 
 def generateCentralBundleChecksums = tasks.register('generateCentralBundleChecksums') {
     dependsOn stageCentralBundleRepo
+    notCompatibleWithConfigurationCache('Generates checksum files by scanning staged output directory at execution time.')
     notCompatibleWithConfigurationCache('Generates checksum files by scanning staged output directory at execution time.')
 
     doLast {
