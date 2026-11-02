@@ -1,7 +1,9 @@
 # gradle-ooxml-plugin
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/org.flowdigger.gradle.ooxml?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/org.flowdigger.gradle.ooxml)
+
+[![Release](https://img.shields.io/github/v/release/flowdigger/gradle-ooxml-plugin?sort=semver)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-ooxml-plugin)
+[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-ooxml-plugin?label=Maven%20Central)](https://central.sonatype.com/search?q=g:org.flowdigger.gradle%20AND%20a:gradle-ooxml-plugin)
 [![Build and Test](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
 [![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
 [![Coverage CI](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/coverage.yml)
