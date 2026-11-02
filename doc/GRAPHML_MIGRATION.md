@@ -4,7 +4,7 @@
 
 Diagram serialization moved to GraphML namespace:
 
-- canonical namespace: `http://jurgenei.name/canonical`
+- canonical namespace: `http://flowdigger.name/canonical`
 - graph namespace: `http://graphml.graphdrawing.org/xmlns`
 
 ## Output Shape
@@ -26,4 +26,3 @@ Inside each graph:
 ## Validation
 
 `ValidateCanonicalTask` resolves schema by URL so imported `graphml.xsd` is loaded correctly.
-

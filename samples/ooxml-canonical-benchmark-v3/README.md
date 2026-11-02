@@ -25,4 +25,3 @@ During PaddleOCR migration, benchmark fallback keeps chart extraction determinis
 ./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxEmfChartFixtureWithGraphEvidence
 ./gradlew test --tests org.flowdigger.gradle.ooxml.OoXmlCanonicalizerTest.canonicalizesDocxPngChartFixtureWithGraphEvidence
 ```
-

@@ -260,7 +260,7 @@ org.flowdigger.gradle.ooxml
 # Canonical Namespace
 
 ```xm*
-xmlns:c="http://jurgenei.name/canonical"
+xmlns:c="http://flowdigger.org/canonical"
 ```
 
 ---

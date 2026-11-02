@@ -100,7 +100,7 @@ canonical.xml (plain xml or packaged zip)
 
 Root namespace:
 
-- `http://jurgenei.name/canonical`
+- `http://flowdigger.org/canonical`
 
 Graph namespace:
 
@@ -312,4 +312,3 @@ Task execution:
 ---
 
 Design principle: maximize unattended recovery quality with bounded heuristic cost, preserve deterministic canonical output, keep extension points open for format-specific recognizers.
-

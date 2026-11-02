@@ -86,7 +86,6 @@ Examples of plain text represented in canonical form:
 
 <kbd>![running text](src/main/resources/png/running-text.png)</kbd>
 
-
 canonical output:
 <table>
   <tr>
@@ -381,7 +380,6 @@ href="media/image1.emf" source-path="/word/document/p[2]/drawing[1]"&gt;
 
 ### Diagrams and XY charts with precision
 
-
 - chart evidence captured as canonical `chart` (`axis`, `series`, ordered values)
 - XY points preserve coordinate order from source evidence
 - raster flow uses OpenCV preprocessing + PaddleOCR ONNX/DJL runtime path
@@ -669,7 +667,7 @@ Canonical output (same content, two serializations):
   </tr>
   <tr>
     <td>
-      <pre lang="xml">&lt;document xmlns="http://jurgenei.name/canonical"&gt;
+      <pre lang="xml">&lt;document xmlns="http://flowdigger.org/canonical"&gt;
   &lt;metadata&gt;
     &lt;documentId&gt;sample&lt;/documentId&gt;
     &lt;version&gt;v1&lt;/version&gt;
@@ -683,7 +681,7 @@ Canonical output (same content, two serializations):
     </td>
     <td valign="top">
       <pre lang="lisp">(.
-  (document {xmlns "http://jurgenei.name/canonical"}
+  (document {xmlns "http://flowdigger.org/canonical"}
     (metadata
       (documentId "sample")
       (version "v1"))

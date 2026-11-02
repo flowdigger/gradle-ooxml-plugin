@@ -16,4 +16,3 @@ From `gradle-ooxml-plugin` root:
 ```bash
 ./gradlew -p samples/schematron-bootstrap-xml verifySample
 ```
-
