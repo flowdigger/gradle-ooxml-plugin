@@ -46,7 +46,7 @@ jobs:
             exit 0
           fi
 
-          git clone --depth 1 "https://github.com/jurgenei/gradle-xml-plugin.git" "$ROOT_PARENT/gradle-xml-plugin"
+          git clone --depth 1 "https://github.com/flowdigger/gradle-xml-plugin.git" "$ROOT_PARENT/gradle-xml-plugin"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
