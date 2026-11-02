@@ -1,16 +1,14 @@
 # gradle-ooxml-plugin
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
+[![Build](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/ci.yml)
 [![Release](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/release.yml)
-[![Build and Test](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
-[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/gradle-build.yml)
-[![Coverage CI](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/coverage.yml)
-[![CodeQL](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/codeql.yml)
-[![Dependency Check](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/dependency-check.yml)
-[![SpotBugs Security](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/spotbugs-security.yml)
-[![Checkstyle](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/jurgenei/gradle-ooxml-plugin/actions/workflows/checkstyle.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/jurgenei/gradle-ooxml-plugin/security/dependabot)
-[![Coverage](https://codecov.io/gh/jurgenei/gradle-ooxml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/jurgenei/gradle-ooxml-plugin)
+[![Coverage CI](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/coverage.yml)
+[![CodeQL](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/codeql.yml)
+[![Dependency Check](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/dependency-check.yml)
+[![SpotBugs Security](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/flowdigger/gradle-ooxml-plugin/actions/workflows/spotbugs-security.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-ooxml-plugin/security/dependabot)
+[![Coverage](https://codecov.io/gh/flowdigger/gradle-ooxml-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-ooxml-plugin)
 [![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-ooxml-plugin.svg)](https://search.maven.org/artifact/org.flowdigger.gradle/gradle-ooxml-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
@@ -778,3 +776,24 @@ Generate schema-first JAXB sources:
 - task conversion tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlToCanonicalTaskTest.java`
 - functional TestKit tests: `src/test/java/org/flowdigger/gradle/ooxml/OoXmlPluginFunctionalTest.java`
 - asset extraction tests: `src/test/java/org/flowdigger/gradle/ooxml/ExtractAssetsTaskTest.java`
+
+## Release to Maven Central
+
+Set credentials and signing material:
+
+```bash
+export ORG_GRADLE_PROJECT_mavenCentralUsername=...
+export ORG_GRADLE_PROJECT_mavenCentralPassword=...
+export ORG_GRADLE_PROJECT_signingKey=...
+export ORG_GRADLE_PROJECT_signingPassword=...
+export ORG_GRADLE_PROJECT_signingKeyId=...
+```
+
+Build signed Central bundle:
+
+```bash
+./gradlew clean packageCentralBundle
+```
+
+Release workflow (`.github/workflows/release.yml`) uploads bundle to Sonatype Central Publisher API on `v*` tags (or manual dispatch).
+Configure repository secrets: `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_KEY`, `SIGNING_PASSWORD`, `SIGNING_KEY_ID`.
