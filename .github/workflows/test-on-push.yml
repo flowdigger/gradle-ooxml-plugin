@@ -21,6 +21,23 @@ jobs:
           java-version: "21"
           cache: gradle
 
+      - name: Ensure gradle-xml-plugin is available
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT_PARENT="$(dirname "$GITHUB_WORKSPACE")"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+
+          if [ -d "$ROOT_PARENT/gradle-xml-plugin/.git" ]; then
+            exit 0
+          fi
+
+          if git clone --depth 1 "https://github.com/$OWNER/gradle-xml-plugin.git" "$ROOT_PARENT/gradle-xml-plugin"; then
+            exit 0
+          fi
+
+          git clone --depth 1 "https://github.com/flowdigger/gradle-xml-plugin.git" "$ROOT_PARENT/gradle-xml-plugin"
+
       - name: Run tests
         run: |
           chmod +x ./gradlew
