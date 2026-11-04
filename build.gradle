@@ -27,6 +27,11 @@ ext {
     findSecBugsVersion = '1.13.0'
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 repositories {
     mavenCentral()
 }
