@@ -146,6 +146,36 @@ gradlePlugin {
     }
 }
 
+publishing {
+    publications.withType(MavenPublication).configureEach {
+        pom {
+            name = 'OOXML Canonical Plugin'
+            description = 'Gradle plugin for OOXML canonicalization and asset extraction'
+            url = 'https://github.com/flowdigger/gradle-ooxml-plugin'
+
+            licenses {
+                license {
+                    name = 'MIT License'
+                    url = 'https://opensource.org/licenses/MIT'
+                }
+            }
+
+            developers {
+                developer {
+                    id = 'flowdigger'
+                    name = 'Flowdigger'
+                }
+            }
+
+            scm {
+                connection = 'scm:git:https://github.com/flowdigger/gradle-ooxml-plugin.git'
+                developerConnection = 'scm:git:ssh://git@github.com/flowdigger/gradle-ooxml-plugin.git'
+                url = 'https://github.com/flowdigger/gradle-ooxml-plugin'
+            }
+        }
+    }
+}
+
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
     finalizedBy tasks.named('jacocoTestReport')
