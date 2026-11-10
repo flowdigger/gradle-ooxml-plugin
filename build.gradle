@@ -16,7 +16,7 @@ configurations {
 }
 
 group = 'org.flowdigger.gradle'
-version = '1.0.2'
+version = '1.0.1'
 
 checkstyle {
     toolVersion = '10.26.1'
