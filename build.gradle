@@ -4,9 +4,10 @@ plugins {
     id 'java-gradle-plugin'
     id 'jacoco'
     id 'maven-publish'
-    id 'signing'
-    id 'checkstyle'
+    id 'org.flowdigger.maven-publish'
+        id 'checkstyle'
     id 'org.owasp.dependencycheck' version '13.0.0'
+    id 'org.flowdigger.dependency-check'
     id 'com.github.spotbugs' version '6.1.0'
 }
 
@@ -15,7 +16,7 @@ configurations {
 }
 
 group = 'org.flowdigger.gradle'
-version = '1.0.0'
+version = '1.0.1'
 
 checkstyle {
     toolVersion = '10.26.1'
@@ -93,21 +94,6 @@ tasks.named('compileJava') {
 }
 
 def dependencyCheckSuppression = file('dependency-check-suppressions.xml')
-dependencyCheck {
-    formats = ['HTML', 'JSON', 'XML']
-    failBuildOnCVSS = 7.0
-    if (dependencyCheckSuppression.exists()) {
-        suppressionFile = dependencyCheckSuppression.absolutePath
-    }
-    analyzers {
-        ossIndex {
-            enabled = false
-        }
-    }
-    nvd {
-        apiKey = findProperty('org.owasp.dependencycheck.nvd.api.key') ?: System.getenv('NVD_API_KEY')
-    }
-}
 
 spotbugs {
     toolVersion = spotbugsEngineVersion
@@ -137,7 +123,7 @@ gradlePlugin {
 
     plugins {
         ooxmlPlugin {
-            id = 'org.flowdigger.gradle.ooxml'
+            id = 'org.flowdigger.ooxml'
             implementationClass = 'org.flowdigger.gradle.ooxml.OoXmlPlugin'
             displayName = 'OOXML Canonical Plugin'
             description = 'Converts DOCX/PPTX/XLSX to canonical XML and extracts assets.'
@@ -224,46 +210,34 @@ tasks.register('coverage') {
 }
 
 
-signing {
-    def signingKey = providers.gradleProperty('signingKey').orNull
-    def signingPassword = providers.gradleProperty('signingPassword').orNull
-    def signingKeyId = providers.gradleProperty('signingKeyId').orNull
-    def validKeyIdPattern = ~/(?i)^[0-9a-f]{8}([0-9a-f]{8})?$/
-    def normalizedSigningKeyId = signingKeyId
-            ?.trim()
-            ?.replaceFirst(/^(?i)0x/, '')
-    if (!(normalizedSigningKeyId ==~ validKeyIdPattern)) {
-        normalizedSigningKeyId = null
+if (providers.gradleProperty('signingKey').present && providers.gradleProperty('signingPassword').present) {
+    def signPublicationTasks = tasks.matching { it.name.startsWith('sign') && it.name.endsWith('Publication') }
+    tasks.matching { it.name.startsWith('publish') && it.name.endsWith('PublicationToMavenLocal') }.configureEach {
+        dependsOn signPublicationTasks
     }
-
-    if (signingKey && signingPassword) {
-        if (normalizedSigningKeyId) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
-        } else {
-            useInMemoryPgpKeys(signingKey, signingPassword)
-        }
-    } else {
-        useGpgCmd()
-    }
-
-    sign publishing.publications
 }
 
 
-def centralArtifactId = (project.findProperty('mavenArtifactId') ?: project.name).toString()
-def centralGroupPath = project.group.toString().replace('.', '/')
+def centralStagingRoot = layout.buildDirectory.dir('central-staging-repo')
 
 def stageCentralBundleRepo = tasks.register('stageCentralBundleRepo', Sync) {
     dependsOn tasks.named('publishToMavenLocal')
+    into(centralStagingRoot)
 
-    def artifactBaseDir = file("${System.getProperty('user.home')}/.m2/repository/${centralGroupPath}/${centralArtifactId}")
-    def artifactVersionDir = file("${artifactBaseDir}/${project.version}")
-    from(artifactVersionDir)
-    into(layout.buildDirectory.dir("central-staging-repo/${centralGroupPath}/${centralArtifactId}/${project.version}"))
+    publishing.publications.withType(MavenPublication).all { publication ->
+        def publicationPath = "${publication.groupId.replace('.', '/')}/${publication.artifactId}/${publication.version}"
+        from(file("${System.getProperty('user.home')}/.m2/repository/${publicationPath}")) {
+            into(publicationPath)
+        }
+    }
 
     doFirst {
-        if (!artifactVersionDir.exists()) {
-            throw new GradleException("Expected local Maven artifact version directory not found: ${artifactVersionDir}")
+        publishing.publications.withType(MavenPublication).each { publication ->
+            def publicationPath = "${publication.groupId.replace('.', '/')}/${publication.artifactId}/${publication.version}"
+            def localPublicationDir = file("${System.getProperty('user.home')}/.m2/repository/${publicationPath}")
+            if (!localPublicationDir.exists()) {
+                throw new GradleException("Expected local Maven publication directory not found: ${localPublicationDir}")
+            }
         }
     }
 }
@@ -271,12 +245,11 @@ def stageCentralBundleRepo = tasks.register('stageCentralBundleRepo', Sync) {
 def generateCentralBundleChecksums = tasks.register('generateCentralBundleChecksums') {
     dependsOn stageCentralBundleRepo
     notCompatibleWithConfigurationCache('Generates checksum files by scanning staged output directory at execution time.')
-    notCompatibleWithConfigurationCache('Generates checksum files by scanning staged output directory at execution time.')
 
     doLast {
-        def stagedVersionDir = layout.buildDirectory.dir("central-staging-repo/${centralGroupPath}/${centralArtifactId}/${project.version}").get().asFile
-        if (!stagedVersionDir.exists()) {
-            throw new GradleException("Expected staged version directory not found: ${stagedVersionDir}")
+        def stagedRepoDir = centralStagingRoot.get().asFile
+        if (!stagedRepoDir.exists()) {
+            throw new GradleException("Expected staged repository directory not found: ${stagedRepoDir}")
         }
 
         def checksum = { File input, String algorithm ->
@@ -291,7 +264,7 @@ def generateCentralBundleChecksums = tasks.register('generateCentralBundleChecks
             digest.digest().collect { String.format('%02x', it & 0xff) }.join('')
         }
 
-        stagedVersionDir.eachFileRecurse { file ->
+        stagedRepoDir.eachFileRecurse { file ->
             if (file.isFile() && !file.name.endsWith('.md5') && !file.name.endsWith('.sha1')) {
                 file.parentFile.toPath().resolve(file.name + '.md5').toFile().text = checksum(file, 'MD5') + System.lineSeparator()
                 file.parentFile.toPath().resolve(file.name + '.sha1').toFile().text = checksum(file, 'SHA-1') + System.lineSeparator()

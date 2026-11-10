@@ -577,7 +577,7 @@ Visual-recognition and chart-evidence corpus.
 
 ## Plugin ID
 
-- `org.flowdigger.gradle.ooxml`
+- `org.flowdigger.ooxml`
 
 ## Tasks
 
@@ -594,7 +594,7 @@ Visual-recognition and chart-evidence corpus.
 
 ```groovy
 plugins {
-    id 'org.flowdigger.gradle.ooxml'
+    id 'org.flowdigger.ooxml'
 }
 ```
 

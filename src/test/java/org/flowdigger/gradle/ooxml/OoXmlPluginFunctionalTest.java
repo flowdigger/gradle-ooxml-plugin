@@ -28,7 +28,7 @@ class OoXmlPluginFunctionalTest {
         Files.writeString(projectDir.resolve("settings.gradle"), "rootProject.name = 'ooxml-functional-test'\n", StandardCharsets.UTF_8);
         Files.writeString(projectDir.resolve("build.gradle"), """
                 plugins {
-                    id 'org.flowdigger.gradle.ooxml'
+                    id 'org.flowdigger.ooxml'
                 }
 
                 tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
@@ -60,7 +60,7 @@ class OoXmlPluginFunctionalTest {
         Files.writeString(projectDir.resolve("settings.gradle"), "rootProject.name = 'ooxml-functional-e2e'\n", StandardCharsets.UTF_8);
         Files.writeString(projectDir.resolve("build.gradle"), """
                 plugins {
-                    id 'org.flowdigger.gradle.ooxml'
+                    id 'org.flowdigger.ooxml'
                 }
 
                 tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
@@ -104,8 +104,8 @@ class OoXmlPluginFunctionalTest {
 
         Files.writeString(projectDir.resolve("build.gradle"), """
                 plugins {
-                    id 'org.flowdigger.gradle.ooxml'
-                    id 'org.flowdigger.gradle.xml'
+                    id 'org.flowdigger.ooxml'
+                    id 'org.flowdigger.xml'
                 }
 
                 tasks.register('bootstrapCanonicalSchematron', org.flowdigger.gradle.xml.SchematronBootstrapTask) {
@@ -125,7 +125,7 @@ class OoXmlPluginFunctionalTest {
                 """, StandardCharsets.UTF_8);
 
         Files.writeString(projectDir.resolve("src/main/xml/canonical.xml"), """
-                <document xmlns='http://jurgenei.name/canonical'>
+                <document xmlns='http://flowdigger.org/canonical'>
                   <metadata>
                     <documentId>sample</documentId>
                     <version>1</version>
@@ -160,7 +160,7 @@ class OoXmlPluginFunctionalTest {
         Files.writeString(projectDir.resolve("settings.gradle"), "rootProject.name = 'ooxml-functional-legacy'\n", StandardCharsets.UTF_8);
         Files.writeString(projectDir.resolve("build.gradle"), """
                 plugins {
-                    id 'org.flowdigger.gradle.ooxml'
+                    id 'org.flowdigger.ooxml'
                 }
 
                 tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {
@@ -191,7 +191,7 @@ class OoXmlPluginFunctionalTest {
         Files.writeString(projectDir.resolve("settings.gradle"), "rootProject.name = 'ooxml-functional-xir'\n", StandardCharsets.UTF_8);
         Files.writeString(projectDir.resolve("build.gradle"), """
                 plugins {
-                    id 'org.flowdigger.gradle.ooxml'
+                    id 'org.flowdigger.ooxml'
                 }
 
                 tasks.named('ooxmlToCanonical', org.flowdigger.gradle.ooxml.OoXmlToCanonicalTask) {

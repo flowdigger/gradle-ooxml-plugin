@@ -22,7 +22,7 @@ class ValidateCanonicalTaskTest {
         Path canonical = projectDir.toPath().resolve("build/ooxml/canonical");
         Files.createDirectories(canonical);
         Files.writeString(canonical.resolve("sample.xml1"), """
-                <document xmlns="http://jurgenei.name/canonical">
+                <document xmlns="http://flowdigger.org/canonical">
                   <metadata>
                     <documentId>sample</documentId>
                     <version>1</version>
@@ -54,7 +54,7 @@ class ValidateCanonicalTaskTest {
         try (ZipOutputStream zip = new ZipOutputStream(Files.newOutputStream(zipPath))) {
             zip.putNextEntry(new ZipEntry("canonical.xml1"));
             zip.write("""
-                    <document xmlns="http://jurgenei.name/canonical" xmlns:g="http://graphml.graphdrawing.org/xmlns">
+                    <document xmlns="http://flowdigger.org/canonical" xmlns:g="http://graphml.graphdrawing.org/xmlns">
                       <metadata>
                         <documentId>sample</documentId>
                         <version>v2</version>
@@ -83,7 +83,7 @@ class ValidateCanonicalTaskTest {
         Path canonical = projectDir.toPath().resolve("build/ooxml/canonical");
         Files.createDirectories(canonical);
         Files.writeString(canonical.resolve("chart.xml1"), """
-                <document xmlns="http://jurgenei.name/canonical">
+                <document xmlns="http://flowdigger.org/canonical">
                   <metadata>
                     <documentId>chart</documentId>
                     <version>v1</version>
