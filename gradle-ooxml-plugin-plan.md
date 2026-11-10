@@ -239,7 +239,7 @@ Canonical XML
 # Proposed Package Structure
 
 ```text
-org.flowdigger.gradle.ooxml
+org.flowdigger.ooxml
 │
 ├── task
 │

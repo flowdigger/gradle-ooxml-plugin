@@ -4,9 +4,10 @@ plugins {
     id 'java-gradle-plugin'
     id 'jacoco'
     id 'maven-publish'
-    id 'signing'
-    id 'checkstyle'
+    id 'org.flowdigger.maven-publish'
+        id 'checkstyle'
     id 'org.owasp.dependencycheck' version '13.0.0'
+    id 'org.flowdigger.dependency-check'
     id 'com.github.spotbugs' version '6.1.0'
 }
 
@@ -93,21 +94,6 @@ tasks.named('compileJava') {
 }
 
 def dependencyCheckSuppression = file('dependency-check-suppressions.xml')
-dependencyCheck {
-    formats = ['HTML', 'JSON', 'XML']
-    failBuildOnCVSS = 7.0
-    if (dependencyCheckSuppression.exists()) {
-        suppressionFile = dependencyCheckSuppression.absolutePath
-    }
-    analyzers {
-        ossIndex {
-            enabled = false
-        }
-    }
-    nvd {
-        apiKey = findProperty('org.owasp.dependencycheck.nvd.api.key') ?: System.getenv('NVD_API_KEY')
-    }
-}
 
 spotbugs {
     toolVersion = spotbugsEngineVersion
@@ -137,7 +123,7 @@ gradlePlugin {
 
     plugins {
         ooxmlPlugin {
-            id = 'org.flowdigger.gradle.ooxml'
+            id = 'org.flowdigger.ooxml'
             implementationClass = 'org.flowdigger.gradle.ooxml.OoXmlPlugin'
             displayName = 'OOXML Canonical Plugin'
             description = 'Converts DOCX/PPTX/XLSX to canonical XML and extracts assets.'
@@ -224,29 +210,11 @@ tasks.register('coverage') {
 }
 
 
-signing {
-    def signingKey = providers.gradleProperty('signingKey').orNull
-    def signingPassword = providers.gradleProperty('signingPassword').orNull
-    def signingKeyId = providers.gradleProperty('signingKeyId').orNull
-    def validKeyIdPattern = ~/(?i)^[0-9a-f]{8}([0-9a-f]{8})?$/
-    def normalizedSigningKeyId = signingKeyId
-            ?.trim()
-            ?.replaceFirst(/^(?i)0x/, '')
-    if (!(normalizedSigningKeyId ==~ validKeyIdPattern)) {
-        normalizedSigningKeyId = null
+if (providers.gradleProperty('signingKey').present && providers.gradleProperty('signingPassword').present) {
+    def signPublicationTasks = tasks.matching { it.name.startsWith('sign') && it.name.endsWith('Publication') }
+    tasks.matching { it.name.startsWith('publish') && it.name.endsWith('PublicationToMavenLocal') }.configureEach {
+        dependsOn signPublicationTasks
     }
-
-    if (signingKey && signingPassword) {
-        if (normalizedSigningKeyId) {
-            useInMemoryPgpKeys(normalizedSigningKeyId, signingKey, signingPassword)
-        } else {
-            useInMemoryPgpKeys(signingKey, signingPassword)
-        }
-    } else {
-        useGpgCmd()
-    }
-
-    sign publishing.publications
 }
 
 

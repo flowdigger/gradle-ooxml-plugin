@@ -5,10 +5,10 @@
  * are serialized under canonical and GraphML namespaces.</p>
  */
 @XmlSchema(
-        namespace = "http://jurgenei.name/canonical",
+        namespace = "http://flowdigger.org/canonical",
         elementFormDefault = XmlNsForm.QUALIFIED,
         xmlns = {
-                @XmlNs(prefix = "", namespaceURI = "http://jurgenei.name/canonical")
+                @XmlNs(prefix = "", namespaceURI = "http://flowdigger.org/canonical")
         }
 )
 package org.flowdigger.gradle.ooxml.canonical;

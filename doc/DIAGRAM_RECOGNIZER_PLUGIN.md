@@ -13,7 +13,7 @@ Add recognizer classes in Gradle extension:
 
 ```groovy
 plugins {
-    id 'org.flowdigger.gradle.ooxml'
+    id 'org.flowdigger.ooxml'
 }
 
 ooxml {
