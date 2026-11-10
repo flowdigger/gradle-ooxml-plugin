@@ -209,15 +209,6 @@ tasks.register('coverage') {
     dependsOn tasks.named('jacocoTestCoverageVerification')
 }
 
-
-if (providers.gradleProperty('signingKey').present && providers.gradleProperty('signingPassword').present) {
-    def signPublicationTasks = tasks.matching { it.name.startsWith('sign') && it.name.endsWith('Publication') }
-    tasks.matching { it.name.startsWith('publish') && it.name.endsWith('PublicationToMavenLocal') }.configureEach {
-        dependsOn signPublicationTasks
-    }
-}
-
-
 def centralStagingRoot = layout.buildDirectory.dir('central-staging-repo')
 
 def stageCentralBundleRepo = tasks.register('stageCentralBundleRepo', Sync) {
